@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - feature/*
 
 
 env:
@@ -25,16 +24,16 @@ jobs:
       exclude:
         - nodejs_version: 18
           operating_system: macos-latest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating_system }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
 
-      - name: Setup Node.js Version - 18
+      - name: Setup Node.js Version - ${{ matrix.nodejs_version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: ${{ matrix.nodejs_version }}
 
 
       - name: Install Dependencies
